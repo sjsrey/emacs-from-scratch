@@ -1156,5 +1156,31 @@ Dial the GC threshold back down so that garbage collection happens more frequent
 
 * Org-Roam
 #+begin_src emacs-lisp
-;; here be the magic
+              ;; here be the magic
+
+            (use-package org-roam
+              :ensure t
+              :custom
+              (org-roam-directory (file-truename "~/org-roam/"))
+              :bind (("C-c n l" . org-roam-buffer-toggle)
+                     ("C-c n f" . org-roam-node-find)
+                     ("C-c n g" . org-roam-graph)
+                     ("C-c n i" . org-roam-node-insert)
+                     ("C-c n c" . org-roam-capture)
+                     ;; Dailies
+                     ("C-c n j" . org-roam-dailies-capture-today))
+              :config
+              (org-roam-db-autosync-mode)
+              ;; If using org-roam-protocol
+              (require 'org-roam-protocol))
+
+          (setq org-roam-v2-ack t)
+
+      ;; org-roam-ui
+      ;; instructions at  https://github.com/org-roam/org-roam-ui#manually
+      ;; 
+
+
+  (add-to-list 'load-path "~/.emacs.d/private/org-roam-ui")
+  (load-library "org-roam-ui")
 #+end_src
