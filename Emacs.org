@@ -15,8 +15,8 @@ The following variables are used to tweak some of the configuration pieces for u
   ;;       in Emacs and init.el will be generated automatically!
 
   ;; You will most likely need to adjust this font size for your system!
-  (defvar efs/default-font-size 100)
-  (defvar efs/default-variable-font-size 100)
+  (defvar efs/default-font-size 120)
+  (defvar efs/default-variable-font-size 120)
 
   ;; Make frame transparency overridable
   (defvar efs/frame-transparency '(90 . 90))
