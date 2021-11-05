@@ -2,8 +2,8 @@
 ;;       in Emacs and init.el will be generated automatically!
 
 ;; You will most likely need to adjust this font size for your system!
-(defvar efs/default-font-size 180)
-(defvar efs/default-variable-font-size 180)
+(defvar efs/default-font-size 100)
+(defvar efs/default-variable-font-size 100)
 
 ;; Make frame transparency overridable
 (defvar efs/frame-transparency '(90 . 90))
@@ -38,14 +38,14 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package auto-package-update
-  :custom
-  (auto-package-update-interval 7)
-  (auto-package-update-prompt-before-update t)
-  (auto-package-update-hide-results t)
-  :config
-  (auto-package-update-maybe)
-  (auto-package-update-at-time "09:00"))
+;  (use-package auto-package-update
+;    :custom
+;    (auto-package-update-interval 7)
+;    (auto-package-update-prompt-before-update t)
+;    (auto-package-update-hide-results t)
+;    :config
+;    (auto-package-update-maybe)
+;    (auto-package-update-at-time "09:00"))
 
 ;; NOTE: If you want to move everything out of the ~/.emacs.d folder
 ;; reliably, set `user-emacs-directory` before loading no-littering!
@@ -265,6 +265,7 @@
 
   (setq org-agenda-files
         '("~/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org"
+          "~/Dropbox/org/gtd/gtd.org"
           "~/Projects/Code/emacs-from-scratch/OrgFiles/Habits.org"
           "~/Projects/Code/emacs-from-scratch/OrgFiles/Birthdays.org"))
 
@@ -406,14 +407,18 @@
   (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
 ;; Automatically tangle our Emacs.org config file when we save it
-(defun efs/org-babel-tangle-config ()
-  (when (string-equal (file-name-directory (buffer-file-name))
-                      (expand-file-name user-emacs-directory))
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
+    (defun efs/org-babel-tangle-config ()
+      (when (string-equal (file-name-directory (buffer-file-name))
+                          (expand-file-name user-emacs-directory))
+        ;; Dynamic scoping to the rescue
+        (let ((org-confirm-babel-evaluate nil))
+          (org-babel-tangle))))
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+    (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+    ;; here is a comment to check that output gets updated on save
+    ;; is this working? Now?
+  ;; more comments here
+;; and here
 
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
@@ -610,3 +615,5 @@
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
+
+;; here be the magic

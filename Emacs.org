@@ -1,5 +1,5 @@
 #+title: Emacs From Scratch Configuration
-#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
+#+PROPERTY: header-args:emacs-lisp :tangle ~/.emacs.d/init.el :mkdirp yes
 
 * Welcome!
 
@@ -430,6 +430,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
 
     (setq org-agenda-files
           '("~/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org"
+            "~/Dropbox/org/gtd/gtd.org"
             "~/Projects/Code/emacs-from-scratch/OrgFiles/Habits.org"
             "~/Projects/Code/emacs-from-scratch/OrgFiles/Birthdays.org"))
 
@@ -612,18 +613,20 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
 
 #+begin_src emacs-lisp
 
-  ;; Automatically tangle our Emacs.org config file when we save it
-  (defun efs/org-babel-tangle-config ()
-    (when (string-equal (file-name-directory (buffer-file-name))
-                        (expand-file-name user-emacs-directory))
-      ;; Dynamic scoping to the rescue
-      (let ((org-confirm-babel-evaluate nil))
-        (org-babel-tangle))))
+    ;; Automatically tangle our Emacs.org config file when we save it
+    (defun efs/org-babel-tangle-config ()
+      (when (string-equal (file-name-directory (buffer-file-name))
+                          (expand-file-name user-emacs-directory))
+        ;; Dynamic scoping to the rescue
+        (let ((org-confirm-babel-evaluate nil))
+          (org-babel-tangle))))
 
-  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
-  ;; here is a comment to check that output gets updated on save
-  ;; is this working? Now?
-  
+    (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+    ;; here is a comment to check that output gets updated on save
+    ;; is this working? Now?
+  ;; more comments here
+;; and here
+
 #+end_src
 
 * Development
@@ -1149,4 +1152,9 @@ Dial the GC threshold back down so that garbage collection happens more frequent
   ;; Make gc pauses faster by decreasing the threshold.
   (setq gc-cons-threshold (* 2 1000 1000))
 
+#+end_src
+
+* Org-Roam
+#+begin_src emacs-lisp
+;; here be the magic
 #+end_src
